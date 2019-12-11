@@ -1,0 +1,12 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    "no-extra-semi": "error",
+    "prefer-const": "error",
+    "no-const-assign": "error",
+    "no-implicit-globals": "error"
+  }
+}

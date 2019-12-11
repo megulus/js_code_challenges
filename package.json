@@ -1,0 +1,30 @@
+{
+  "name": "js_code_challenges",
+  "version": "1.0.0",
+  "description": "practice problems in javascript",
+  "main": "index.js",
+  "dependencies": {
+    "eslint": "^6.7.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/register": "^7.7.4",
+    "chai": "^4.2.0",
+    "jest": "^24.9.0",
+    "jest-cli": "^24.9.0",
+    "mocha": "^6.2.2"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/megulus/js_code_challenges.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/megulus/js_code_challenges/issues"
+  },
+  "homepage": "https://github.com/megulus/js_code_challenges#readme"
+}
