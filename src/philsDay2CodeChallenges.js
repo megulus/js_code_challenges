@@ -38,11 +38,11 @@ const allPairs = (arr) => {
 // => 11
 
 const totalTime = (arr) => {
-  // TODO: sort the array
+  const sorted = arr.sort((a, b) => a[0] - b[0])
   let total = 0
   let lower = 0
   let upper = 0
-  for (const interval of arr) {
+  for (const interval of sorted) {
     const lo = interval[0]
     const hi = interval[1]
     if (lo > upper) {
@@ -107,9 +107,9 @@ const stringfyCollatefy = (arr) => {
 
 // console.log('rotatefy([1,2,3,4,5], 2) ' + rotatefy([1, 2, 3, 4, 5], 2))
 // console.log('allPairs([1, 2, 3]) ' + allPairs([1, 2, 3]))
-// console.log('totalTime([[1, 4], [2, 3]]) => ' + totalTime([[1, 4], [2, 3]]))
-// console.log('totalTime([[1, 2], [4, 6,]]) => ' + totalTime([[1, 2], [4, 6]]))
-// console.log('totalTime([[1, 4], [2, 4], [6, 8], [7, 9], [10, 15]]) => ' + totalTime([[1, 4], [2, 4], [6, 8], [7, 9], [10, 15]]))
-const collated = collatefy([{ time: new Date("2019-12-17T03:24:00"), value: 216 }, { time: new Date("2019-11-11T03:00:00"), value: 4 }, { time: new Date("2019-12-14T03:01:00"), value: 100 }])
+console.log('totalTime([[1, 4], [2, 3]]) => ' + totalTime([[1, 4], [2, 3]]))
+console.log('totalTime([[4, 6,], [1, 2]]) => ' + totalTime([[4, 6,], [1, 2]]))
+console.log('totalTime([[1, 4], [6, 8], [2, 4], [7, 9], [10, 15]]) => ' + totalTime([[1, 4], [6, 8], [2, 4], [7, 9], [10, 15]]))
+// const collated = collatefy([{ time: new Date("2019-12-17T03:24:00"), value: 216 }, { time: new Date("2019-11-11T03:00:00"), value: 4 }, { time: new Date("2019-12-14T03:01:00"), value: 100 }])
 // console.log('monthly totals ' + collatefy([{ time: new Date("2019-12-17T03:24:00"), value: 216 }, { time: new Date("2019-11-11T03:00:00"), value: 4 }, { time: new Date("2019-12-14T03:01:00"), value: 100 }]))
-stringfyCollatefy(collated)
+// stringfyCollatefy(collated)
