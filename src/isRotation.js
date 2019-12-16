@@ -23,8 +23,89 @@
 //    in the same order, allowing for start at startchar and wrapping around to 0
 //    once we reach the end of str1
 
+
+// implementation 4
+
+const isRotation4 = (str1, str2) => {
+  if (str1.length !== str2.length) return false
+  for (let i = 0; i < str2.length; i++) {
+    if (areEqual(str1, str2, i)) return true
+  }
+  return false
+}
+
+const areEqual = (str1, str2, str2Start) => {
+  if (str1.length !== str2.length) return false
+  let count1 = 0
+  let count2 = str2Start
+  const length = str1.length
+  while (count1 < length) {
+    if (str1[count1] === str2[count2]) {
+      if (count2 < length) {
+        count2 += 1
+      }
+      else {
+        count2 = 0
+      }
+      count1 += 1
+    }
+    else {
+      return false
+    }
+  }
+  return true
+}
+
 // implementation 3
 // get rid of array, use constant additional space
+
+const isRotation3 = (str1, str2) => {
+  if (str1.length !== str2.length) return false
+  return isSubstring(str1, str2)
+}
+
+const isSubstring = (str1, str2) => {
+  const length = str1.length
+  const startIndexStr2 = findStr2StartChar(str1, str2)
+  let index1 = 0
+  let index2 = startIndexStr2
+  let count = 0
+  while (count < length) {
+    if (str1[index1] === str2[index2]) {
+      if (index2 < length - 1) {
+        index2 += 1
+      }
+      else {
+        index2 = 0
+      }
+      index1 += 1
+    }
+    else {
+      return false
+    }
+    count += 1
+  }
+  return count === length
+}
+
+const isStartChar = (str1, str2, location) => {
+  let count1 = 0
+  let count2 = location
+  while (count2 < str2.length - 1) {
+    if (str1[count1] !== str2[count2]) return false
+    count1 += 1
+    count2 += 1
+  }
+  return true
+}
+
+const findStr2StartChar = (str1, str2) => {
+  let location = 0
+  while (location < str2.length) {
+    if (isStartChar(str1, str2, location)) return location
+    location += 1
+  }
+}
 
 // implementation 2
 
@@ -62,24 +143,24 @@ const buildCharacterIndexArray = (str1, str2) => {
   return charIndexArr
 }
 
-const isStartChar = (str1, str2, location) => {
-  let count1 = 0
-  let count2 = location
-  while (count2 < str2.length - 1) {
-    if (str1[count1] !== str2[count2]) return false
-    count1 += 1
-    count2 += 1
-  }
-  return true
-}
+// const isStartChar = (str1, str2, location) => {
+//   let count1 = 0
+//   let count2 = location
+//   while (count2 < str2.length - 1) {
+//     if (str1[count1] !== str2[count2]) return false
+//     count1 += 1
+//     count2 += 1
+//   }
+//   return true
+// }
 
-const findStr2StartChar = (str1, str2) => {
-  let location = 0
-  while (location < str2.length) {
-    if (isStartChar(str1, str2, location)) return location
-    location += 1
-  }
-}
+// const findStr2StartChar = (str1, str2) => {
+//   let location = 0
+//   while (location < str2.length) {
+//     if (isStartChar(str1, str2, location)) return location
+//     location += 1
+//   }
+// }
 
 // implementation 1
 
@@ -123,4 +204,5 @@ const isRotation = (str1, str2) => {
 const str1 = process.argv[2]
 const str2 = process.argv[3]
 // console.log(str1 + ' is a rotation of ' + str2 + '? ' + isRotation(str1, str2))
-console.log(str1 + ' is a rotation of ' + str2 + '? ' + isRotation2(str1, str2))
+// console.log(str1 + ' is a rotation of ' + str2 + '? ' + isRotation2(str1, str2))
+console.log(str1 + ' is a rotation of ' + str2 + '? ' + isRotation3(str1, str2))
