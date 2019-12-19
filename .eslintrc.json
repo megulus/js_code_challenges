@@ -8,5 +8,9 @@
     "prefer-const": "error",
     "no-const-assign": "error",
     "no-implicit-globals": "error"
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
   }
 }

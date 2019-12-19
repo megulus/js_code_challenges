@@ -6,6 +6,7 @@
 
 export const iterative_fib = (n) => {
   if (n == 0) return 0
+  if (n == 1) return 1
   let two_previous = 0
   let one_previous = 1
   let fib_num = 1
@@ -19,4 +20,13 @@ export const iterative_fib = (n) => {
   return fib_value
 }
 
-console.log(iterative_fib(process.argv[2]))
+export const recursive_fib = (n) => {
+  if (n == 0) return 0
+  if (n == 1) return 1
+  else {
+    return recursive_fib(n - 1) + recursive_fib(n - 2)
+  }
+}
+
+// console.log('iterative: ' + iterative_fib(process.argv[2]))
+// console.log('recursive: ' + recursive_fib(process.argv[2]))

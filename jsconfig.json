@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "module": "commonJS",
+    "module": "es6",
     "target": "es6",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "classic"
   },
-  "include": ["src/"]
+  "include": ["src/**/*", "__test__/**/*"]
 }
