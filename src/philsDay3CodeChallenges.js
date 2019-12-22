@@ -14,7 +14,6 @@
 const initialize = (arr) => {
   const data = arr.sort((a, b) => a.date - b.date)
   return {
-    data: data,
     avg60: (d) => {
       let sum = 0
       let count = 0
@@ -25,7 +24,7 @@ const initialize = (arr) => {
           count += 1
         }
       }
-      return Math.round(((sum * 1.0) / count) * 10) / 10 || null
+      return (sum * 1.0) / count || null
     }
   }
 }
@@ -44,7 +43,7 @@ const findPath = (object, attrString) => {
   for (const key of attrs) {
     if (key) attr = attr[key]
   }
-  return JSON.stringify(attr)
+  return attr
 }
 
 // Generalize your solution to yesterday’s pair - finding problem to support n - tuples. 
@@ -72,7 +71,7 @@ const allTuples = (arr, size) => {
   }
   else {
     for (let i = 0; i < arr.length; i++) {
-      if (arr.slice(i + 1).length) {
+      if (arr.length > 1) {
         arrayOfTuples = arrayOfTuples.concat(merge(arr[i], allTuples(arr.slice(i + 1), size - 1)))
       }
     }
@@ -85,9 +84,9 @@ const allTuples = (arr, size) => {
 // console.log('aggregations.avg60(new Date("1995-12-17T03:24:30")): ' + aggregations.avg60(new Date("1995-12-17T03:24:30")))
 // console.log('aggregations.avg60(new Date("1995-12-17T03:24:00")): ' + aggregations.avg60(new Date("1995-12-17T03:24:00")))
 // const object = { name: { first: "megulus", middle: "evergrump", last: "dahlgren" }, status: "grumpy" }
-// console.log('findPath(object, "status"): ' + findPath(object, "status"))
-// console.log('findPath(object, "name"): ' + findPath(object, "name"))
-// console.log('findPath(object, ""): ' + findPath(object, ""))
+// console.log('findPath(object, "status"): ' + JSON.stringify(findPath(object, "status")))
+// console.log('findPath(object, "name"): ' + JSON.stringify(findPath(object, "name")))
+// console.log('findPath(object, ""): ' + JSON.stringify(findPath(object, "")))
 console.log('allTuples([1, 2, 3], 2) ' + JSON.stringify(allTuples([1, 2, 3], 2)))
 console.log('allTuples([1, 2, 3], 3) ' + JSON.stringify(allTuples([1, 2, 3], 3)))
 console.log('allTuples([1, 2, 3, 4], 3): ' + JSON.stringify(allTuples([1, 2, 3, 4], 3)))

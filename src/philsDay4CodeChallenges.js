@@ -10,12 +10,11 @@ const initialize = (array) => {
   const data = []
   let sum = 0
   for (let i = 0; i < array.length; i++) {
-    data[i] = sum += array[i]
+    sum += array[i]
+    data[i] = sum
   }
   return {
-    data: data,
     sumInterval: (num1, num2) => {
-      const diff = num1 - 1 >= 0 ? data[num2] - data[num1 - 1] : data[num2]
       return num1 - 1 >= 0 ? data[num2] - data[num1 - 1] : data[num2]
     }
   }
