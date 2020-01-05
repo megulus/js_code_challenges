@@ -1,2 +1,5 @@
+.DS_Store
 node_modules
-src/hackerRankWarmups.js
+src/interview_challenges
+__test__/test_helpers
+utils/*.txt

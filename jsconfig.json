@@ -5,5 +5,5 @@
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "classic"
   },
-  "include": ["src/**/*", "__test__/**/*"]
+  "include": ["src/**/*", "__test__/**/*", "utils/**/*"]
 }

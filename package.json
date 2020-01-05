@@ -4,7 +4,8 @@
   "description": "practice problems in javascript",
   "main": "index.js",
   "dependencies": {
-    "eslint": "^6.7.2"
+    "eslint": "^6.7.2",
+    "esm": "^3.2.25"
   },
   "devDependencies": {
     "@babel/core": "^7.7.5",
