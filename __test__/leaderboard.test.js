@@ -1,4 +1,4 @@
-import { climbingLeaderboard } from '../src/hackerrankDay2Challenges'
+import { climbingLeaderboard } from '../src/hackerrank_challenges/hrDay2'
 import { arrayFromFile } from '../utils/readFileToArray'
 
 

@@ -1,4 +1,4 @@
-import { iterative_fib, recursive_fib } from '../src/fibonacci'
+import { iterative_fib, recursive_fib } from '../src/ctci_other_challenges/fibonacci'
 
 
 test('0th fibonacci number should be 0', () => {
