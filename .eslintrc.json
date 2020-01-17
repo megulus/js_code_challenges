@@ -13,5 +13,11 @@
     "sourceType": "module",
     "allowImportExportEverywhere": true,
     "ecmaVersion": 2020
-  }
+  },
+  "ecmaFeatures": {
+    "modules": true,
+    "arrowFunctions": true,
+    "classes": true
+  },
+  "parser": "babel-eslint"
 }
