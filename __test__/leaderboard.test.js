@@ -1,4 +1,4 @@
-import { climbingLeaderboard } from '../src/hackerrank_challenges/hrDay2'
+import { climbingLeaderboard } from '../src/hackerrank_challenges/hourglassSum'
 import { arrayFromFile } from '../utils/readFileToArray'
 
 
