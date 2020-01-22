@@ -1,4 +1,4 @@
-import { arrayFromFile } from '../../utils/readFileToArray'
+import { arrayFromFile } from '../../../utils/readFileToArray'
 
 // Migratory birds
 // Given an array of sightings, determine the species sighted most frequently
