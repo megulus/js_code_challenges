@@ -1,20 +1,40 @@
+import { arrayFromFile } from "../../../utils/readFileToArray"
+
 /* Given an array a and a tolerance k, you may assume that each element of a
  * is within k positions of its sorted position. E.g.:
  * a = [1, 0, 2, 4, 3, 7, 6, 5], k = 2
  * Using this information, write a function to sort a, given k
  */
 
+// const sortSubarray = (array, start, end) => {
+//   const lo = start
+//   let hi = lo + 1
+//   while (hi <= end) {
+//     if (array[lo] > array[hi]) {
+//       const tmp = array[lo]
+//       array[lo] = array[hi]
+//       array[hi] = tmp
+//     }
+//     hi++
+//   }
+// }
+
 const sortSubarray = (array, start, end) => {
   const lo = start
   let hi = lo + 1
+  let lowest = lo
   while (hi <= end) {
     if (array[lo] > array[hi]) {
-      const tmp = array[lo]
-      array[lo] = array[hi]
-      array[hi] = tmp
+      if (array[hi] < lowest) lowest = hi
+      // const tmp = array[lo]
+      // array[lo] = array[hi]
+      // array[hi] = tmp
     }
     hi++
   }
+  const tmp = array[lowest]
+  array[lowest] = array[lo]
+  array[lo] = tmp
 }
 
 const sortWithTolerance = (a, k) => {
