@@ -20,21 +20,19 @@ import { arrayFromFile } from "../../../utils/readFileToArray"
 // }
 
 const sortSubarray = (array, start, end) => {
-  const lo = start
-  let hi = lo + 1
-  let lowest = lo
-  while (hi <= end) {
-    if (array[lo] > array[hi]) {
-      if (array[hi] < lowest) lowest = hi
-      // const tmp = array[lo]
-      // array[lo] = array[hi]
-      // array[hi] = tmp
+  let next = start
+  let lowestVal = array[next]
+  let lowestValIndex = next
+  while (next <= end) {
+    if (array[next] < lowestVal) {
+      lowestVal = array[next]
+      lowestValIndex = next
     }
-    hi++
+    next++
   }
-  const tmp = array[lowest]
-  array[lowest] = array[lo]
-  array[lo] = tmp
+  const tmp = array[lowestValIndex]
+  array[lowestValIndex] = array[start]
+  array[start] = tmp
 }
 
 const sortWithTolerance = (a, k) => {
