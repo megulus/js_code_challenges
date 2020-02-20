@@ -28,6 +28,25 @@ const dumbSumSubsequence = (arr, n) => {
   return false
 }
 
+const slightlyLessDumbSumSubsequence = (arr, n) => {
+  const sequenceSums = []
+  let sum = 0
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i]
+    sequenceSums[i] = sum
+  }
+  for (let i = 0; i < sequenceSums.length; i++) {
+    for (let j = i - 1; j > 0; j--) {
+      if (sequenceSums[i] - sequenceSums[j] === n) {
+        return true
+      }
+    }
+  }
+  return false
+}
+
 
 console.log('dumbSumSubsequence([2, 3, 8, 4, 1, 2, 6], 12): ' + dumbSumSubsequence([2, 3, 8, 4, 1, 2, 6], 12))
 console.log('dumbSumSubsequence([2, 3, 8, 4, 1, 2, 6], 7): ' + dumbSumSubsequence([2, 3, 8, 4, 1, 2, 6], 7))
+console.log('slightlyLessDumbSumSubsequence([2, 3, 8, 4, 1, 2, 6], 12): ' + slightlyLessDumbSumSubsequence([2, 3, 8, 4, 1, 2, 6], 12))
+console.log('slightlyLessDumbSumSubsequence([2, 3, 8, 4, 1, 2, 6], 7): ' + slightlyLessDumbSumSubsequence([2, 3, 8, 4, 1, 2, 6], 7))

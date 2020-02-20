@@ -74,9 +74,26 @@ const insertNodeAtPosition = (head, data, position) => {
   return newNode
 }
 
+// from hackerrank:
+// position will always be at least 0 and less than the number of the elements in the list
+const deleteNode = (head, position) => {
+  if (head !== null) {
+    if (position === 0) return head.next
+    let pointer = 0
+    let prev = head
+    while ((pointer < (position - 1)) && (prev.next !== null)) {
+      prev = prev.next
+      pointer++
+    }
+    prev.next = prev.next.next
+  }
+  return head
+}
+
 // test code:
 
 const testDeleteOrReplaceNode = (data, fn, position, nodeData = null) => {
+  console.log('data: ' + data + ' position: ' + position)
   const ws = process.stdout
   const sep = '\n'
   const linkedList = new SinglyLinkedList()
@@ -84,8 +101,11 @@ const testDeleteOrReplaceNode = (data, fn, position, nodeData = null) => {
     const tempHead = insertNodeAtTail(linkedList.head, data[i])
     linkedList.head = tempHead
   }
-  const head = fn(linkedList.head, nodeData, position)
+  console.log('original: ')
+  printSinglyLinkedList(linkedList.head, sep, ws)
+  const head = nodeData !== null ? fn(linkedList.head, nodeData, position) : fn(linkedList.head, position)
   linkedList.head = head
+  console.log('modified: ')
   printSinglyLinkedList(linkedList.head, sep, ws) 
 }
 
@@ -100,9 +120,11 @@ const testInsertNode = (data, fn) => {
   printSinglyLinkedList(linkedList.head, sep, ws)
 }
 
-console.log('tail, [4, 5, 2, 7] ')
-testInsertNode([4, 5, 2, 7], insertNodeAtTail)
-console.log('head, [383, 484, 392, 975, 321] ')
-testInsertNode([383, 484, 392, 975, 321], insertNodeAtHead)
+// console.log('tail, [4, 5, 2, 7] ')
+// testInsertNode([4, 5, 2, 7], insertNodeAtTail)
+// console.log('head, [383, 484, 392, 975, 321] ')
+// testInsertNode([383, 484, 392, 975, 321], insertNodeAtHead)
 console.log('insert at tail, [16, 13, 7], insert at position 2, data 1')
 testDeleteOrReplaceNode([16, 13, 7], insertNodeAtPosition, 2, 1)
+console.log('insert at tail, [20, 6, 2, 19, 7, 4, 15, 9], delete at position 3')
+testDeleteOrReplaceNode([20, 6, 2, 19, 7, 4, 15, 9], deleteNode, 3, null)
