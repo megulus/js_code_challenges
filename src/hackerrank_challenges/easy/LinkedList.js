@@ -33,6 +33,26 @@ function printSinglyLinkedList(node, sep, ws) {
 
 // End Hackerrank Code
 
+const reverse = (head) => {
+  let newHead = head
+  if (newHead !== null) {
+    let curr = head
+    let next = head.next
+    while (next !== null) {
+      const tmp = curr
+      console.log('tmp ' + tmp.data)
+      curr = next
+      console.log('curr ' + curr.data)
+      next = curr.next
+      console.log('next ' + next.data)
+      curr.next = tmp
+      console.log('curr.next ' + curr.next.data)
+    }
+    newHead = curr
+  }
+  return newHead
+}
+
 const insertNodeAtTail = (head, data) => {
   const newNode = new SinglyLinkedListNode(data)
   if (head !== null) {
@@ -92,8 +112,7 @@ const deleteNode = (head, position) => {
 
 // test code:
 
-const testDeleteOrReplaceNode = (data, fn, position, nodeData = null) => {
-  console.log('data: ' + data + ' position: ' + position)
+const testReverse = (data) => {
   const ws = process.stdout
   const sep = '\n'
   const linkedList = new SinglyLinkedList()
@@ -101,11 +120,25 @@ const testDeleteOrReplaceNode = (data, fn, position, nodeData = null) => {
     const tempHead = insertNodeAtTail(linkedList.head, data[i])
     linkedList.head = tempHead
   }
-  console.log('original: ')
+  console.log('original')
+  printSinglyLinkedList(linkedList.head, sep, ws)
+  linkedList.head = reverse(linkedList.head)
+  console.log('reversed')
+  console.log('head')
+  // printSinglyLinkedList(linkedList.head, sep, ws)
+}
+
+const testDeleteOrReplaceNode = (data, fn, position, nodeData = null) => {
+  const ws = process.stdout
+  const sep = '\n'
+  const linkedList = new SinglyLinkedList()
+  for (let i = 0; i < data.length; i++) {
+    const tempHead = insertNodeAtTail(linkedList.head, data[i])
+    linkedList.head = tempHead
+  }
   printSinglyLinkedList(linkedList.head, sep, ws)
   const head = nodeData !== null ? fn(linkedList.head, nodeData, position) : fn(linkedList.head, position)
   linkedList.head = head
-  console.log('modified: ')
   printSinglyLinkedList(linkedList.head, sep, ws) 
 }
 
@@ -124,7 +157,9 @@ const testInsertNode = (data, fn) => {
 // testInsertNode([4, 5, 2, 7], insertNodeAtTail)
 // console.log('head, [383, 484, 392, 975, 321] ')
 // testInsertNode([383, 484, 392, 975, 321], insertNodeAtHead)
-console.log('insert at tail, [16, 13, 7], insert at position 2, data 1')
-testDeleteOrReplaceNode([16, 13, 7], insertNodeAtPosition, 2, 1)
-console.log('insert at tail, [20, 6, 2, 19, 7, 4, 15, 9], delete at position 3')
-testDeleteOrReplaceNode([20, 6, 2, 19, 7, 4, 15, 9], deleteNode, 3, null)
+// console.log('insert at tail, [16, 13, 7], insert at position 2, data 1')
+// testDeleteOrReplaceNode([16, 13, 7], insertNodeAtPosition, 2, 1)
+// console.log('insert at tail, [20, 6, 2, 19, 7, 4, 15, 9], delete at position 3')
+// testDeleteOrReplaceNode([20, 6, 2, 19, 7, 4, 15, 9], deleteNode, 3, null)
+console.log('reverse, [1, 2, 3, 4, 5]')
+testReverse([1, 2, 3, 4, 5])

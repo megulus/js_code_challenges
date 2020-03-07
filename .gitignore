@@ -1,5 +1,4 @@
 .DS_Store
 node_modules
-src/interview_challenges
 __test__/test_helpers
 utils/*.txt

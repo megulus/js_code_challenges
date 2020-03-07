@@ -1,0 +1,96 @@
+Also from F------. Also could have done better.
+
+Problem:
+
+Design an elevator. It needs to:
+- respond to calls from any floor (parameters: calling floor, direction - i.e., up or down)
+- take user to a floor once it has responded to the call
+- single elevator, 10 story building
+
+clarifying questions:
+- assuming that when the class is instantiated, the elevator is at floor 0
+- when traveling up, elevator will finish responding to the calls from floors above current location before 
+  responding to any on floors below current location
+
+questions from interviewers:
+- what if the user changes his/her mind or makes a mistake? E.g., they're on floor 6, and they press "up",
+  but when they get into the elevator, they choose floor 3?
+
+working through scenario:
+- elevator is at currentFloor, receives this series of fn calls:
+    e.g., currentFloor === 3
+    call(5, up)
+    call(6, down)
+    setDestination(7) // user at floor 5
+    call(8, down) 
+    setDestination(0) // user at floor 8
+    setDestination(2) // user at floor 6
+
+- expected behavior: 
+  - elevator responds to call from 5 (user sets destination to 7)
+  - elevator travels to floor 7
+  - elevator responds to call from 8 (user sets destination to 0)
+  - elevator responds to call at floor 6 (user sets destination to 2)
+  - elevator travels to floor 2
+  - elevator travels to floor 0
+
+- logic we need:
+  - when a call is received, we need to know:
+    - where the elevator currently is, and what direction it's traveling
+      - if it's still traveling up, we're not going to respond to a lower floor request
+      - this also means that if a floor above us calls but wants to go down (when we're going up), we save that call for later
+      - how to handle this?
+        - we could separate the calls/destinations
+          - two sorted arrays - up and down?
+            - if we determine that a call should be responded to in the current pass, we add it to one array
+            - if instead the call or destination request should be responded to when elevator changes direction, we add it to the other array
+
+initialize instance variables:
+- this.currentFloor = 0
+- this.calls = [] // nope
+- this.destinations = [] // nope
+- this.up = minPQ
+- this.down = maxPQ
+- this.nextUp = minPQ
+- this.nextDown = maxPQ
+- // do we need a variable to track which direction the elevator is traveling in? ==> yeah, let's try that
+- this.direction = 'up' // not sure whether this should be initialized to 'up' (given that we're initializing currentFloor to 0) or null
+
+
+const call = (floorFrom, direction) => {
+  // if elevator is traveling up and direction === up
+      if floorFrom >= this.currentFloor => add floorFrom to this.up
+      if floorFrom < this.currentFloor => add floorFrom to this.nextUp
+  // if elevator is traveling up and direction === down
+      add floorFrom to this.down
+  // if elevator is traveling down and direction === up
+      add floorFrom to this.up
+  // if elevator is traveling down and direction === down
+      if floorFrom <= this.currentFloor => add floorFrom to this.down
+      if floorFrom > this.currentFloor => add floorFrom to this.nextDown
+  moveElevator()
+}
+
+const setDestination = (floor) => {
+  // we no longer care about the button (up or down) that the user pushed to call the elevator - that was used to respond to the call only
+  // edge case: if user enters floor === currentFloor, we don't add it to any queues, but should we throw an error or just ignore?
+  // if elevator is traveling up and floor > currentFloor => add floor to this.up
+  // if elevator is traveling up and floor < currentFloor => add floor to this.down (this is the "user changed his/her mind" scenario - but this is how actual elevators work, I think)
+  // if elevator is traveling down and floor < currentFloor => add floor to this.down
+  // if elevator is traveling down and floor > currentFloor => add floor to this.up
+  moveElevator()
+}
+
+moveElevator = () => {
+  // if this.direction === up:
+  // while !(this.up).isEmpty {
+    floor = remove next lowest floor from this.up  // QUESTION: how will this handle the fact that this.up might be getting modified as this function is running?
+    update this.currentFloor = floor
+  }
+  // now that this.up is empty, handle this.down, change direction of elevator, set this.up = this.nextUp, set this.nextUp to empty minPQ
+  // while !(this.down).isEmpty {
+    floor = remove next highest floor from this.down
+    update this.currentFloor = floor
+  }
+  // change direction, set this.down = this.nextDown, set this.nextDown to empty maxPQ
+}
