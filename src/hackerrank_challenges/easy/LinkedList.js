@@ -35,20 +35,18 @@ function printSinglyLinkedList(node, sep, ws) {
 
 const reverse = (head) => {
   let newHead = head
+  const newLast = head
   if (newHead !== null) {
     let curr = head
     let next = head.next
     while (next !== null) {
       const tmp = curr
-      console.log('tmp ' + tmp.data)
       curr = next
-      console.log('curr ' + curr.data)
       next = curr.next
-      console.log('next ' + next.data)
       curr.next = tmp
-      console.log('curr.next ' + curr.next.data)
     }
     newHead = curr
+    newLast.next = null
   }
   return newHead
 }
@@ -116,16 +114,16 @@ const testReverse = (data) => {
   const ws = process.stdout
   const sep = '\n'
   const linkedList = new SinglyLinkedList()
+  const linkedListRev = new SinglyLinkedList()
   for (let i = 0; i < data.length; i++) {
     const tempHead = insertNodeAtTail(linkedList.head, data[i])
     linkedList.head = tempHead
   }
   console.log('original')
   printSinglyLinkedList(linkedList.head, sep, ws)
-  linkedList.head = reverse(linkedList.head)
+  linkedListRev.head = reverse(linkedList.head)
   console.log('reversed')
-  console.log('head')
-  // printSinglyLinkedList(linkedList.head, sep, ws)
+  printSinglyLinkedList(linkedListRev.head, sep, ws)
 }
 
 const testDeleteOrReplaceNode = (data, fn, position, nodeData = null) => {
