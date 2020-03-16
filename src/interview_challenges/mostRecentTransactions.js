@@ -23,3 +23,54 @@ Additionally, we have a RecentTransactions class with the methods:
 NOTE: the thing I missed in the phone screen was that the best data structure 
 for maintaining the access order data is a doubly-linked list
 */
+
+import { DoublyLinkedList } from './DoublyLinkedList'
+
+export class Transaction {
+  
+  constructor(tid, amount) {
+    this.tid = tid
+    this.amount = amount
+  }
+
+}
+
+export class RecentTransactions {
+  
+  constructor(capacity) {
+    this.capacity = capacity
+    this.transactionsLookup = {}
+    this.orderedTransactions = new DoublyLinkedList()
+    this.length = 0
+  }
+
+  save = (transaction) => {
+    const id = transaction.tid
+    if (id in this.transactionsLookup) {
+      const position = this.orderedTransactions.findElement(id)
+      this.orderedTransactions.deleteAtPosition(position)
+    }
+    this.transactionsLookup[id] = transaction
+    this.orderedTransactions.insertNodeAtHead(id)
+    this.length += 1
+    if (this.length > this.capacity) {
+      const leastRecent = this.orderedTransactions.tail
+      delete this.transactionsLookup[leastRecent]
+      const tailPosition = this.orderedTransactions.length - 1
+      this.orderedTransactions.deleteAtPosition(tailPosition)
+    }
+  }
+
+  findById = (tid) => {
+    const transaction = this.transactionsLookup[tid]
+    const position = this.orderedTransactions.findElement(tid)
+    this.orderedTransactions.deleteAtPosition(position)
+    this.orderedTransactions.insertNodeAtHead(tid)
+    return transaction
+  }
+
+  toString = () => {
+    return this.orderedTransactions.toString()
+  }
+
+}

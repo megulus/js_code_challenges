@@ -25,6 +25,7 @@ export class DoublyLinkedList {
       tmp.prev = this.head
       this.head.next = tmp      
     }
+    this.length += 1
   } 
 
   // returns first index containing data, -1 if not found
@@ -43,17 +44,34 @@ export class DoublyLinkedList {
   deleteAtPosition = (position) => {
     let node = this.head
     let count = 0
-    while (count < position && node !== null) {
-      count += 1
+    if (position === 0) {
+      const next = node.next
+      if (next !== null) this.head = next
+    }
+    else {
+      while (count < position && node !== null) {
+        count += 1
+        node = node.next
+      }
+      const prev = node.prev
+      const next = node.next
+      prev.next = next
+      if (next) next.prev = prev  
+    }
+    this.length -= 1
+  }
+
+  toString = () => {
+    let str = ''
+    let node = this.head
+    while (node !== null) {
+      str += node.data
       node = node.next
     }
-    const prev = node.prev
-    const next = node.next
-    prev.next = next
-    next.prev = prev  
+    return str
   }
   
-  toString = () => {
+  printDoublyLinkedList = () => {
     const ws = process.stdout
     let node = this.head
     while (node !== null) {
